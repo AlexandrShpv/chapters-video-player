@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapters Video Player</title>
+    <style>
+        /* Basic styles for the video player */
+        #videoContainer {
+            max-width: auto;
+            margin: 0 auto;
+            text-align: center;
+        }
+        video {
+            width: auto;
+            height: auto;
+        }
+        #controls {
+            margin-top: 10px;
+        }
+
+        /* Table styling */
+        .table-container {
+            overflow: auto;
+            max-height: 300px;
+            position: relative;
+        }
+
+        table {
+            width: auto;
+            max-width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            /* margin-top: 20px; */
+        }
+        table tr td:nth-child(1) {
+            white-space: nowrap;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            position: sticky;
+            top:0;
+            z-index: 1;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div id="myComments">
+        <div class="table-container">
+            <table id="segmentTable">
+                <thead><tr><th>Time</th><th>Section</th></tr></thead>
+                <tbody>
+                    <tr><td>0:00 - 0:05</td><td>1. Chapter</td></tr>
+                    <tr><td>0:05 - 0:10</td><td>2. Chapter</td></tr>
+                    <tr><td>0:10 - 0:20</td><td>3. Chapter</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="videoContainer">
+        <video id="myVideo" controls>
+            <source src="videos/Hilarious Scare Pranks.mp4" type="video/mp4">
+        </video>
+        <div id="controls">
+            <!-- <button onclick="playPause()">Play/Pause</button>
+            <button onclick="stopVideo()">Stop</button>
+            <button onclick="skip(-10)">Rewind 10s</button>
+            <button onclick="skip(10)">Forward 10s</button>
+            <br><br>
+            <label for="volume">Volume:</label> -->
+            <!-- <input type="range" id="volume" min="0" max="1" step="0.1" value="1" onchange="setVolume(this.value)"> -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
