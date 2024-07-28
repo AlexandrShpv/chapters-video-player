@@ -1,6 +1,16 @@
-FROM nginx:latest
+# Stage 1: Build the application
+FROM node:alpine as build
 
 WORKDIR /app
+
+COPY package.json ./
+RUN npm install
+
+COPY . .
+RUN npx webpack
+
+FROM nginx:latest
+
 
 COPY dist/ /usr/share/nginx/html/dist
 COPY index.html /usr/share/nginx/html
