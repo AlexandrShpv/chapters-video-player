@@ -1,3 +1,25 @@
+const resizer = document.getElementById('resizer');
+const leftSide = document.getElementById('myComments');
+const rightSide = document.getElementById('videoContainer');
+
+resizer.addEventListener('mousedown', (e) => {
+    document.addEventListener('mousemove', resize);
+    document.addEventListener('mouseup', stopResize);
+});
+
+function resize(e) {
+    const containerWidth = resizer.parentNode.getBoundingClientRect().width;
+    const leftWidth =e.clientX / containerWidth * 100;
+    const rightWidth = 100 - leftWidth;
+
+    leftSide.style.width = `${leftWidth}%`;
+    rightSide.style.width = `${rightWidth}%`;
+}
+
+function stopResize() {
+    document.removeEventListener('mousemove', resize);
+    document.removeEventListener('mouseup', stopResize);
+}
 const video = document.getElementById('myVideo');
 let loopStart = 0;
 let loopEnd = 0;
@@ -63,6 +85,37 @@ function skip(seconds) {
 function setVolume(value) {
     video.volume = value;
 }
+// Function to toggle fullscreen
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.mozRequestFullScreen) { // Firefox
+            video.mozRequestFullScreen();
+        } else if (video.webkitRequestFullscreen) { // Chrome, Safari and Opera
+            video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) { // IE/Edge
+            video.msRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { // Firefox
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { // IE/Edge
+            document.msExitFullscreen();
+        }
+    }
+}
+
+// Add event listener to the document to toggle fullscreen when 'F' key is pressed
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'f' || event.key === 'F') {
+        toggleFullscreen();
+    }
+});
 
 // Initialize timeData and set up click listeners when the page loads
 window.onload = initializeTimeData;

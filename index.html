@@ -5,24 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapters Video Player</title>
     <style>
-        /* Basic styles for the video player */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #container {
+            display: flex;
+            height: 100%;
+        }
+        #myComments {
+            width: 30%;
+            background-color: lightgrey;
+            overflow: auto;
+        }
+        #resizer {
+            width: 0.5%;
+            cursor: col-resize;
+            background-color: darkgrey;
+        }
         #videoContainer {
-            max-width: auto;
-            margin: 0 auto;
-            text-align: center;
+            width: 69%;
+            background-color: lightgrey;
+            overflow: auto;
         }
         video {
-            width: auto;
+            width: 100%;
             height: auto;
         }
         #controls {
             margin-top: 10px;
         }
 
-        /* Table styling */
         .table-container {
             overflow: auto;
-            max-height: 300px;
+            max-height: auto;
             position: relative;
         }
 
@@ -31,7 +48,6 @@
             max-width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            /* margin-top: 20px; */
         }
         table tr td:nth-child(1) {
             white-space: nowrap;
@@ -57,32 +73,45 @@
     </style>
 </head>
 <body>
-    <div id="myComments">
-        <div class="table-container">
-            <table id="segmentTable">
-                <thead><tr><th>Time</th><th>Section</th></tr></thead>
-                <tbody>
-                    <tr><td>0:00 - 0:05</td><td>1. Chapter</td></tr>
-                    <tr><td>0:05 - 0:10</td><td>2. Chapter</td></tr>
-                    <tr><td>0:10 - 0:20</td><td>3. Chapter</td></tr>
-                </tbody>
-            </table>
+    <div id="container">
+        <div id="myComments">
+            <div class="table-container">
+                <table id="segmentTable">
+                    <thead><tr><th>Time</th><th>Section</th></tr></thead>
+                    <tbody>
+                        <tr><td>0:00 - 0:33</td><td>Las faila atvēršana</td></tr>
+                        <tr><td>0:33 - 0:35</td><td>Las faila projekciju informācija</td></tr>
+                        <tr><td>1:12 - 1:47</td><td>Power Line Parameter Settings: Working Directory. Input Point Cloud Spatial Coordinate WGS 84 / UTM zone 34N EPSG:32634. Classification and Detection Parameters: C:/Program Files/LiPowerline/5.1.0.0/Sample.xml. Detected Line Voltage Level: 10kV. Classify and Detect Parameters.</td></tr>
+                        <tr><td>2:10 - 6:54</td><td>Ieslēgs EDL skātu. Atzīmēt balstus ar marķeriem. Markers point size. Show/Hide All Tower Points. Import/Export Tower.</td></tr>
+                        <tr><td>6:54 - 7:28</td><td>Distribution Network Inspection -&gt; Clip/Classify (Channel Width = 30m) -&gt; Classify Parameter (Scissors Crossing, Scissors Crossing Down, Noise). Threads Num(1-32): 4. Start.</td></tr>
+                        <tr><td>8:19 - 8:30</td><td>Finish classify. Remove loaded point cloud and add the section point cloud.</td></tr>
+                        <tr><td>9:04 - 11:45</td><td>Detection Result List. 3D Profile. Class Setting. Class Configuration (from Class to Class). Change class. Noise. Clear. </td></tr>
+                        <tr><td>11:54 - 13:44</td><td>Export Tower (LiTower, KML, CSV). Tower Account to excel in Work Directory. SpanToMajorTower. </td></tr>
+                        <tr><td>13:55 - 16:19</td><td>Vector Realtime Condition. Mark Tower. Set Towers Type. Start/End. Batch (Insulator Length: 2m, Slice Thickness: 1m, Cluster Radius: 0.5m). Start. </td></tr>
+                        <tr><td>16:19 - 26:28</td><td>Manipulation with vector conductor.</td></tr>
+                        <tr><td>26:28 - 29:42</td><td>Completion Acceptance. Vector Realtime Condition -> Save line to Shape file. Completion Acceptance -> Sag. Result list un visualisation. </td></tr>
+                        <tr><td>29:42 - 33</td><td>Danger Points.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="resizer"></div>
+        <div id="videoContainer">
+            <video id="myVideo" controls>
+                <source src="videos/video1.mp4" type="video/mp4">
+            </video>
+            <div id="controls">
+                <button onclick="playPause()">Play/Pause</button>
+                <button onclick="stopVideo()">Stop</button>
+                <button onclick="skip(-10)">Rewind 10s</button>
+                <button onclick="skip(10)">Forward 10s</button>
+                <br><br>
+                <label for="volume">Volume:</label>
+                <input type="range" id="volume" min="0" max="1" step="0.1" value="1" onchange="setVolume(this.value)">
+            </div>
         </div>
     </div>
-    <div id="videoContainer">
-        <video id="myVideo" controls>
-            <source src="videos/Hilarious Scare Pranks.mp4" type="video/mp4">
-        </video>
-        <div id="controls">
-            <!-- <button onclick="playPause()">Play/Pause</button>
-            <button onclick="stopVideo()">Stop</button>
-            <button onclick="skip(-10)">Rewind 10s</button>
-            <button onclick="skip(10)">Forward 10s</button>
-            <br><br>
-            <label for="volume">Volume:</label> -->
-            <!-- <input type="range" id="volume" min="0" max="1" step="0.1" value="1" onchange="setVolume(this.value)"> -->
-        </div>
-    </div>
-    <script src="dist/bundle.js"></script>
+    <!-- <script src="dist/bundle.js"></script> -->
+    <script src="script.js"></script>
 </body>
 </html>
